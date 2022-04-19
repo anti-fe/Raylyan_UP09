@@ -1,11 +1,12 @@
 //Подключение модулей
 import { openModal, closeModal, validationModal } from "./modules/modal-window.js";
+import { openAccord } from "./modules/accord.js";
 
 //Объявление переменных
 const callBtns = document.querySelectorAll('.call-btn'),
     popupCall = document.querySelector('.popup-call'),
     closePopup = popupCall.querySelector('.popup-close');
-
+const questAccord = document.querySelector('.questions .panel-group');
 
 //Вызов функций
 callBtns.forEach(item => {
@@ -25,4 +26,8 @@ popupCall.addEventListener('click', (e)=>{
     if(e.target.classList.contains('capture-form-btn')) {
         validationModal(popupCall);
     }
+})
+questAccord.addEventListener('click', (e)=>{
+    e.preventDefault();
+    e.target.closest('.panel') ? openAccord(e.target.closest('.panel')) : none;
 })
