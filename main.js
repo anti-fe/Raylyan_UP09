@@ -1,5 +1,5 @@
 //Подключение модулей
-import { openModal, closeModal } from "./modules/modal-window.js";
+import { openModal, closeModal, validationModal } from "./modules/modal-window.js";
 
 //Объявление переменных
 const callBtns = document.querySelectorAll('.call-btn'),
@@ -18,7 +18,11 @@ closePopup.addEventListener('click', (e)=>{
     closeModal(popupCall);
 })
 popupCall.addEventListener('click', (e)=>{
+    e.preventDefault();
     if(!e.target.closest('.popup-content')) {
         closeModal(popupCall);
+    }
+    if(e.target.classList.contains('capture-form-btn')) {
+        validationModal(popupCall);
     }
 })
