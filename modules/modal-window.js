@@ -3,9 +3,7 @@ export const openModal = (modalWindow) => {
     modalWindow.style.display = 'block';
 }
 //Закрытие модального окна
-export const closeModal = (modalWindow) => {
-    const nameInp = modalWindow.querySelector('#name_1'),
-        phoneInp = modalWindow.querySelector('#phone_1');
+export const closeModal = (modalWindow, nameInp, phoneInp) => {
     modalWindow.style.display = 'none';
     nameInp.value = '';
     phoneInp.value = '';
@@ -13,12 +11,11 @@ export const closeModal = (modalWindow) => {
     phoneInp.style.border = '1px solid #ddd';
 }
 //Валидация модального окна
-export const validationModal = (modalWindow) => {
+export const validationModal = (modalWindow, nameInp, phoneInp) => {
     const form = document.querySelector('.capture-form');
     const phoneRegEx = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,11}(\s*)?$/;
     const nameRegEx = /^[а-я ,.'-]+$/i;
-    const nameInp = modalWindow.querySelector('#name_1'),
-        phoneInp = modalWindow.querySelector('#phone_1');
+
     //Name
     nameRegEx.test(nameInp.value) ? nameInp.style.border = '2px solid green' : nameInp.style.border = '2px solid red';
     //Phone
