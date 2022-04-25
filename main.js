@@ -4,6 +4,7 @@ import { openAccord } from "./modules/accord.js";
 import { accordCalc } from "./modules/accord-calc.js";
 
 //Объявление переменных
+const sentence = document.querySelector('.sentence'); 
 const callBtns = document.querySelectorAll('.call-btn'),
     popupCall = document.querySelector('.popup-call'),
     closePopup = popupCall.querySelector('.popup-close');
@@ -11,10 +12,12 @@ const questAccord = document.querySelector('.questions .panel-group');
 const gaugingButton = document.querySelector('.gauging-button'),
     popupCheck = document.querySelector('.popup-check'),
     closePopupCheck = popupCheck.querySelector('.popup-close');
+const popupDiscount = document.querySelector('.popup-discount'),
+    pupupDiscClose = popupDiscount.querySelector('.capture-form .popup-close'),
+    nameInp11 = document.querySelector('#name_11'),
+    phoneInp11 = document.querySelector('#phone_11');
 const nameInp = document.querySelector('#name_1'),
     phoneInp = document.querySelector('#phone_1');
-const nameInp2 = document.querySelector('#name_2'),
-    phoneInp2 = document.querySelector('#phone_2');
 const nameInp12 = document.querySelector('#name_12'),
     phoneInp12 = document.querySelector('#phone_12');
 const accordion = document.querySelector('#accordion');
@@ -64,5 +67,35 @@ accordion.addEventListener('click', (e)=>{
     if(!targetItem.closest('.onoffswitch')) {
         e.preventDefault();
         accordCalc(targetItem);
+    }
+})
+sentence.addEventListener('click', (e)=>{
+    e.preventDefault();
+    if(e.target.classList.contains('discount-btn')) {
+        openModal(popupDiscount);
+    } else if (e.target.classList.contains('add-sentence-btn')) {
+        const allItems = Array.from(e.target.parentElement.children);
+        allItems.forEach(item=>{
+            if (item.classList.contains('hidden')) {
+                item.classList.remove('hidden');
+            } else if (item.classList.contains('visible-sm-block')) {
+                item.classList.remove('visible-sm-block');
+            }
+        })
+        e.target.style.display = 'none';
+    }
+})
+pupupDiscClose.addEventListener('click', (e)=>{
+    e.preventDefault();
+    closeModal(popupDiscount, nameInp11, phoneInp11);
+})
+popupDiscount.addEventListener('click', (e)=>{
+    e.preventDefault()
+    if(!e.target.closest('.popup-content')) {
+        closeModal(popupDiscount, nameInp11, phoneInp11);
+    } 
+    if(e.target.classList.contains('capture-form-btn')) {
+        
+        validationModal(popupDiscount, nameInp11, phoneInp11);
     }
 })
