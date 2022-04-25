@@ -1,7 +1,7 @@
 //Подключение модулей
 import { openModal, closeModal, validationModal } from "./modules/modal-window.js";
 import { openAccord } from "./modules/accord.js";
-import { accordCalc } from "./modules/accord-calc.js";
+import { accordCalc, calculating } from "./modules/accord-calc.js";
 
 //Объявление переменных
 const sentence = document.querySelector('.sentence'); 
@@ -21,6 +21,8 @@ const nameInp = document.querySelector('#name_1'),
 const nameInp12 = document.querySelector('#name_12'),
     phoneInp12 = document.querySelector('#phone_12');
 const accordion = document.querySelector('#accordion');
+const checkboxAccord = document.querySelectorAll('.onoffswitch-checkbox');
+const calcRes = document.querySelector('#calc-result');
 
 //Вызов функций
 callBtns.forEach(item => {
@@ -98,4 +100,21 @@ popupDiscount.addEventListener('click', (e)=>{
         
         validationModal(popupDiscount, nameInp11, phoneInp11);
     }
+})
+checkboxAccord.forEach(cb=>{
+    if (cb.name == 'onoffswitch') {
+        const panelBody = document.querySelector('#collapseTwo .panel-body').children;
+        if(cb.checked) {
+            panelBody[3].style.display = 'none';
+            panelBody[4].style.display = 'none';
+            panelBody[5].style.display = 'none';
+        } else {
+            panelBody[3].style.display = 'inline-block';
+            panelBody[4].style.display = 'inline-block';
+            panelBody[5].style.display = 'inline-block';
+        }
+    }
+    cb.addEventListener('input', ()=>{
+        calculating(cb, calcRes);
+    })
 })
